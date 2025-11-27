@@ -1,68 +1,91 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* ===========================
+   TEMA Y VARIABLES
+   =========================== */
+@theme {
+  --color-tech-blue: #3b82f6;
+  --color-tech-purple: #8b5cf6;
+  --color-tech-pink: #ec4899;
+  
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+  --animate-spin-slow: spin 3s linear infinite;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ===========================
+   KEYFRAMES
+   =========================== */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  a:hover {
-    color: #747bff;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ===========================
+   UTILIDADES
+   =========================== */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in-out;
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .text-gradient-tech {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* ===========================
+   COMPONENTES
+   =========================== */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 
+           rounded-full font-semibold transition-all duration-300 
+           transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 transform hover:scale-105 hover:-translate-y-2;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 bg-slate-900 border border-blue-500/30 
+           rounded-lg focus:border-blue-500 focus:outline-none transition;
   }
 }
